@@ -1,6 +1,9 @@
 <h2><img src="https://cdn.discordapp.com/attachments/1074839843781218344/1098337611631837276/raspberrypi.png" alt="Raspberry Pi Logo" height="19px" width="auto"/> <b>Raspberry Pi Zero Door Lock</b></h2>
 <p><b>Raspberry Pi Python script that locks / unlocks my door using the GPIO pins with a UI for small screens. Optimized for the RPi Zero WH.</b></p>
 <br>
+<h3>Screenshots:</h3>
+<img src="https://user-images.githubusercontent.com/80414685/233193544-4549d281-eacf-4ee9-9d4a-c8bf1907c8da.png" width="40%" height="auto" alt="desktop"/><img src="https://user-images.githubusercontent.com/80414685/233194162-0edd6b52-a7e3-46ae-9400-da95e7d1f032.png" width="40%" height="auto" alt="desktop"/>
+
 <h3>How it works:</h3>
 <p>This is a Python code that runs on a Raspberry Pi to control a door lock. It uses the `RPi.GPIO` library to communicate with the GPIO pins on the Raspberry Pi and a web server to provide a user interface. The door can be unlocked for a specified duration of time by sending a POST request to the server.
 
