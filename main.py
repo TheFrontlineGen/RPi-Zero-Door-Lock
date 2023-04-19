@@ -1,12 +1,11 @@
-#!/usr/bin/env python
 import os, sys
 from RPi import GPIO
 from datetime import timedelta
 import tornado.ioloop
 import tornado.web
 from tornado.ioloop import IOLoop
-
-os.chdir(os.path.dirname(__file__))
+import colorama
+from colorama import Fore, Back, Style
 
 DOOR_PIN = 11
 DEFAULT_DURATION = 3
@@ -15,10 +14,12 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(DOOR_PIN, GPIO.OUT)
 
 def open_door():
-    GPIO.output(DOOR_PIN, 1)
-
+     GPIO.output(DOOR_PIN, 1)
+    print(Fore.GREEN+"Unlocking Door...")
+  
 def close_door():
-    GPIO.output(DOOR_PIN, 0)
+     GPIO.output(DOOR_PIN, 0)
+    print(Fore.RED+"Locking Door...")
 
 def open_door_for_seconds(seconds=3):
     open_door()

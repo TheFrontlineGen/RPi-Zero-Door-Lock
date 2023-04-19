@@ -1,60 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-GB">
   <head>
-    <title>Door Manager</title>
+    <title>Door Manager
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md-6 col-md-offset-3">
-        <div class="page-header">
-          <h1>Door Manager</h1>
-        </div>
-          <div class="panel panel-default form-horizontal">
-            <div class="panel-body">
-              <div class="form-group">
-                <div class="col-sm-12">
-                <button id="open-door-btn" type="button" class="btn btn-primary btn-lg btn-block">Open Door</button>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="seconds" class="col-sm-2 control-label">Duration</label>
-                <div class="col-sm-10">
-                  <div class="input-group">
-                    <input type="text" name="seconds" class="form-control" value="{{ default_duration }}" />
-                    <span class="input-group-addon">second(s)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="static/js/bootstrap.min.js"></script>
-    <script>
-      $(function () {
-        var inputElementSeconds = $('input[name=seconds]')[0];
-        var buttonOpenDoor = $('#open-door-btn')[0];
-
-        $(buttonOpenDoor).on('click', function (e) {
-          e.preventDefault();
-          $.post('/open', {seconds: inputElementSeconds.value});
-        });
-      });
+    <button id="open-door-btn" type="button" class="h-screen w-screen bg-red-800 text-white">
+      <svg id="svg-placeholder" class="h-1/4 w-auto mx-auto my-0 p-0" fill="#FFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/>
+      </svg>
+    </button>
+    <script src="https://code.jquery.com/jquery.js">
     </script>
+    <script>
+  $(function () {
+  var inputElementSeconds = $('input[name=seconds]')[0];
+  var buttonOpenDoor = $('#open-door-btn')[0];
+  var svgPlaceholder = $('#svg-placeholder')[0];
+  var originalBgColor = $(buttonOpenDoor).css('background-color');
+  var isClickAllowed = true;
+
+  $(buttonOpenDoor).on('click', function (e) {
+    e.preventDefault();
+    if (!isClickAllowed) {
+      console.log('Rate limiting click...');
+      return;
+    }
+    isClickAllowed = false;
+    $.ajax({
+      type: "POST",
+      url: "/open",
+      success: function (response) {
+        console.log(response);
+      },
+      error: function (xhr, status, error) {
+        console.log(xhr.responseText);
+      },
+      complete: function () {
+        isClickAllowed = true;
+      },
+    });
+    $(buttonOpenDoor).css('background-color', 'green');
+    $(svgPlaceholder).html('<svg class="mx-auto my-0 p-0 h-1/4 w-auto" xmlns="http://www.w3.org/2000/svg" fill="#FFF" viewBox="0 0 576 512"><path d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48c0 17.7 14.3 32 32 32s32-14.3 32-32V144C576 64.5 511.5 0 432 0S288 64.5 288 144v48H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H352V144z"/></svg>');
+    setTimeout(function () {
+      $(buttonOpenDoor).css('background-color', originalBgColor);
+      $(svgPlaceholder).html('<svg class="h-1/4 w-auto mx-auto my-0 p-0" xmlns="http://www.w3.org/2000/svg" fill="#FFF" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>');
+    }, 3000);
+  });
+});
+    </script>
+
   </body>
 </html>
