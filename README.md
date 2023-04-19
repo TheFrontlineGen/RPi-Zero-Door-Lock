@@ -1,6 +1,6 @@
 <h2><img src="https://cdn.discordapp.com/attachments/1074839843781218344/1098337611631837276/raspberrypi.png" alt="Raspberry Pi Logo" height="19px" width="auto"/> <b>Raspberry Pi Zero Door Lock</b></h2>
 <h3>Repo Info:</h3>
-<p>Raspberry Pi Python script that locks / unlocks my door using the GPIO pins with a UI for small screens. Optimized for the RPi Zero WH.</p>
+<p>RPi Python script that locks / unlocks my door using the GPIO pins with a UI for small screens. Optimized for the RPi Zero WH. (NOT A DOOR PIN LOCK)</p>
 <h3>Features:</h3>
 <ul>
 <li><code>/open</code> Endpoint built in.</li>
