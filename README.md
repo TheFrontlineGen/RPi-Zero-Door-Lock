@@ -8,6 +8,7 @@
 <li>Easy intergration with Home Assistant using the <code>/open</code> POST API endpoint.</li>
 <li>Built in client and serverside rate limiting to disallow spamming the unlock button.</li>
 <li>Unlock length can be changed in <code>main.py</code>.</li>
+<li>Uses GPIO to lock / unlock door (requires a custom built door lock which should look something like the one from <a href="https://youtu.be/pBO0-xkMY0w?t=22"> The Amazing Spider-Man 2</a>).</li>
 <li>Optimized for the <a href="https://amzn.to/41BLjGy">Raspberry Pi Zero</a>, but works with any <a href="https://amzn.to/3oqOkLI">Pi</a>.</li>
 </ul>
 <h3>Screenshots:</h3>
