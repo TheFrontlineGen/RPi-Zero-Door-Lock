@@ -1,6 +1,15 @@
 <h2><img src="https://cdn.discordapp.com/attachments/1074839843781218344/1098337611631837276/raspberrypi.png" alt="Raspberry Pi Logo" height="19px" width="auto"/> <b>Raspberry Pi Zero Door Lock</b></h2>
-<p><b>Raspberry Pi Python script that locks / unlocks my door using the GPIO pins with a UI for small screens. Optimized for the RPi Zero WH.</b></p>
-<br>
+<h3>Repo Info:</h3>
+<p>Raspberry Pi Python script that locks / unlocks my door using the GPIO pins with a UI for small screens. Optimized for the RPi Zero WH.</p>
+<h3>Features:</h3>
+<ul>
+<li><code>/open</code> Endpoint built in.</li>
+<li>Controlled by UI for touch screen displays like <a href="https://amzn.to/3GWaXhk">this</a> one.</li>
+<li>Easy intergration with Home Assistant using the <code>/open</code> POST API endpoint.</li>
+<li>Built in client and serverside rate limiting to disallow spamming the unlock button.</li>
+<li>Unlock length can be changed in <code>main.py</code>.</li>
+<li>Optimized for the <a href="https://amzn.to/41BLjGy">Raspberry Pi Zero</a>, but works with any <a href="https://amzn.to/3oqOkLI">Pi</a>.</li>
+</ul>
 <h3>Screenshots:</h3>
 <img src="https://user-images.githubusercontent.com/80414685/233195166-a08e8c27-8d86-47f3-9572-dec642c7bebe.png" width="100%" alt="screemshot"/>
 <h3>How it works:</h3>
