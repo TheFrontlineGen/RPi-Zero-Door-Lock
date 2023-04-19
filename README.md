@@ -9,3 +9,5 @@ The code starts by setting up the GPIO pin for the door lock and defining functi
 The MainHandler class handles requests to the root URL and renders an HTML template with a button to open the door. The OpenDoorHandler class handles requests to the `/open` URL and calls `open_door_for_seconds()` with the specified duration.
 
 When the button is clicked, a `POST` request is sent to the /open URL using jQuery's `$.ajax()` function. The button is temporarily disabled to prevent multiple clicks, and its background color is changed to green to indicate that the door is being unlocked. After the specified duration, the button is re-enabled, and its background color is restored to its original value. The SVG image inside the button is also updated to show a different icon when the door is unlocked.</p>
+
+<h5><b>Original code by <a href="https://github.com/peaceman">peaceman</a></b>.</h5> 
