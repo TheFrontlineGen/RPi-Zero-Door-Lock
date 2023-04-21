@@ -1,12 +1,10 @@
 import os, sys
 from RPi import GPIO
 from datetime import timedelta
-import tornado
-import tornado.ioloop
-import tornado.web
-from tornado.ioloop import IOLoop
+from flask import Flask, render_template, request
 import colorama
 from colorama import Fore, Back, Style
+
 print(sys.executable)
 
 DOOR_PIN = 11
@@ -25,29 +23,24 @@ def close_door():
 
 def open_door_for_seconds(seconds=3):
     open_door()
-    ioloop = IOLoop.current()
-    ioloop.add_callback(ioloop.add_timeout, timedelta(seconds=seconds), close_door)
+    time.sleep(seconds)
+    close_door()
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.render('index.html', default_duration=DEFAULT_DURATION)
+app = Flask(__name__)
+app.debug = True
+app.static_folder = 'statics'
+app.template_folder = 'html'
 
-class OpenDoorHandler(tornado.web.RequestHandler):
-    def post(self):
-        seconds = int(self.get_body_argument('seconds', DEFAULT_DURATION))
-        open_door_for_seconds(seconds)
+@app.route('/')
+def index():
+    return render_template('index.html', default_duration=DEFAULT_DURATION)
 
-application = tornado.web.Application(
-    [
-        (r"/", MainHandler),
-        (r"/open", OpenDoorHandler),
-    ],
-    debug=True,
-    static_path='statics',
-    template_path='html',
-)
+@app.route('/open', methods=['POST'])
+def open_door_handler():
+    seconds = int(request.form.get('seconds', DEFAULT_DURATION))
+    open_door_for_seconds(seconds)
+    return 'Door opened for {} seconds'.format(seconds)
 
 if __name__ == "__main__":
-    application.listen(80)
-    tornado.ioloop.IOLoop.instance().start()
+    app.run(host='0.0.0.0', port=80)
     GPIO.cleanup()
