@@ -6,6 +6,7 @@ import tornado.web
 from tornado.ioloop import IOLoop
 import colorama
 from colorama import Fore, Back, Style
+print(sys.executable)
 
 DOOR_PIN = 11
 DEFAULT_DURATION = 3
