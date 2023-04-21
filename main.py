@@ -14,12 +14,12 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(DOOR_PIN, GPIO.OUT)
 
 def open_door():
-     GPIO.output(DOOR_PIN, 1)
-    print(Fore.GREEN+"Unlocking Door...")
+    GPIO.output(DOOR_PIN, 1)
+    print(Fore.GREEN + "Unlocking Door...")
   
 def close_door():
-     GPIO.output(DOOR_PIN, 0)
-    print(Fore.RED+"Locking Door...")
+    GPIO.output(DOOR_PIN, 0)
+    print(Fore.RED + "Locking Door...")
 
 def open_door_for_seconds(seconds=3):
     open_door()
@@ -34,7 +34,6 @@ class OpenDoorHandler(tornado.web.RequestHandler):
     def post(self):
         seconds = int(self.get_body_argument('seconds', DEFAULT_DURATION))
         open_door_for_seconds(seconds)
-        
 
 application = tornado.web.Application(
     [
